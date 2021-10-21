@@ -33,6 +33,35 @@ public class ChatServerSocketListener  implements Runnable {
         broadcast(new MessageStoC_Chat(client.getUserName(), m.msg), client);
     }
 
+    private void processPrivateMessage(MessageCtoS_PM pm){
+        System.out.println("Testing private message");
+        ClientConnectionData recipient = null;
+        for(ClientConnectionData c : clientList){
+            if (pm.recipientUserName.equals(c.getUserName())){
+                recipient = c;
+                break;
+            }
+        }
+        if(recipient == null){
+            try{
+                client.getOut().writeObject("There is no such user of the name " + pm.recipientUserName);
+            }
+            catch (Exception ex){
+                System.out.println("Exception caught in private message in null if: " + ex);
+                ex.printStackTrace();
+            }
+        }
+        else{
+            try{
+                recipient.getOut().writeObject(pm.msg);
+            }
+            catch (Exception ex){
+                System.out.println("Exception caught in private message in else: " + ex);
+                ex.printStackTrace();
+            }
+        }
+    }
+
     /**
      * Broadcasts a message to all clients connected to the server.
      */
@@ -69,6 +98,9 @@ public class ChatServerSocketListener  implements Runnable {
                 }
                 else if (msg instanceof MessageCtoS_Chat) {
                     processChatMessage((MessageCtoS_Chat) msg);
+                }
+                else if (msg instanceof MessageCtoS_PM){
+                    processPrivateMessage((MessageCtoS_PM)msg);
                 }
                 else {
                     System.out.println("Unhandled message type: " + msg.getClass());
