@@ -44,7 +44,7 @@ public class ChatServerSocketListener  implements Runnable {
         }
         if(recipient == null){
             try{
-                client.getOut().writeObject("There is no such user of the name " + pm.recipientUserName);
+                client.getOut().writeObject(new MessageStoC_Chat(client.getUserName(), "There is no such user of the name " + pm.recipientUserName)); //TODO make new server to client private message object
             }
             catch (Exception ex){
                 System.out.println("Exception caught in private message in null if: " + ex);
@@ -53,7 +53,7 @@ public class ChatServerSocketListener  implements Runnable {
         }
         else{
             try{
-                recipient.getOut().writeObject(pm.msg);
+                recipient.getOut().writeObject(new MessageStoC_Chat(recipient.getUserName(), pm.msg)); //TODO make new server to client private message object
             }
             catch (Exception ex){
                 System.out.println("Exception caught in private message in else: " + ex);
