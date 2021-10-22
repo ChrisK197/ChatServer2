@@ -52,7 +52,7 @@ public class ChatServerSocketListener  implements Runnable {
         }
         else{
             try{
-                recipient.getOut().writeObject(new MessageStoC_PM(recipient.getUserName(), pm.msg));
+                recipient.getOut().writeObject(new MessageStoC_PM(client.getUserName(), pm.msg));
             }
             catch (Exception ex){
                 System.out.println("Exception caught in private message in else: " + ex);
