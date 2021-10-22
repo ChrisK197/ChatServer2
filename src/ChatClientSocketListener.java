@@ -10,6 +10,12 @@ public class ChatClientSocketListener implements Runnable {
     private void processChatMessage(MessageStoC_Chat m) {
         System.out.println(m.userName + ": " + m.msg);
     }
+    private void processPrivateMessage(MessageStoC_PM m){
+        System.out.println(m);
+    }
+    private void processPrivateMessageError(MessageStoC_PM_Error m){
+        System.out.println(m);
+    }
 
     private void processWelcomeMessage(MessageStoC_Welcome m) {
         System.out.println(m.userName + " joined the server!");
@@ -30,6 +36,12 @@ public class ChatClientSocketListener implements Runnable {
                 }
                 else if (msg instanceof MessageStoC_Chat) {
                     processChatMessage((MessageStoC_Chat) msg);
+                }
+                else if (msg instanceof MessageStoC_PM) {
+                    processPrivateMessage((MessageStoC_PM) msg);
+                }
+                else if (msg instanceof MessageStoC_PM_Error) {
+                    processPrivateMessageError((MessageStoC_PM_Error) msg);
                 }
                 else if (msg instanceof MessageStoC_Exit) {
                     processExitMessage((MessageStoC_Exit) msg);
