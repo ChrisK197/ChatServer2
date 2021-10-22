@@ -43,7 +43,7 @@ public class ChatServerSocketListener  implements Runnable {
         }
         if(recipient == null){
             try{
-                client.getOut().writeObject(new MessageStoC_PM_Error(pm.recipientUserName)); //TODO make new server to client private message object
+                client.getOut().writeObject(new MessageStoC_PM_Error(pm.recipientUserName));
             }
             catch (Exception ex){
                 System.out.println("Exception caught in private message in null if: " + ex);
@@ -52,7 +52,7 @@ public class ChatServerSocketListener  implements Runnable {
         }
         else{
             try{
-                recipient.getOut().writeObject(new MessageStoC_PM(recipient.getUserName(), pm.msg)); //TODO make new server to client private message object
+                recipient.getOut().writeObject(new MessageStoC_PM(recipient.getUserName(), pm.msg));
             }
             catch (Exception ex){
                 System.out.println("Exception caught in private message in else: " + ex);
