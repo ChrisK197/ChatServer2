@@ -8,7 +8,7 @@ public class MessageStoC_PM extends Message{
     }
 
     public String toString(){
-        return "Private Chat Message from: " + userName + ": " + msg;
+        return "Private Chat Message from " + userName + ": " + msg;
     }
 
 }

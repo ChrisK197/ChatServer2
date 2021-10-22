@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ChatServer {
-    public static final int PORT = 54323;
+    public static final int PORT = 54322;
     private static final ArrayList<ClientConnectionData> clientArrayList = new ArrayList<>();
     //Make this a thread-safe collection 
     private static final List<ClientConnectionData> clientList = Collections.synchronizedList(clientArrayList);

@@ -34,9 +34,14 @@ public class ChatClient {
         while (!line.toLowerCase().startsWith("/quit")) {
             if (line.toLowerCase().startsWith("@")){
                 String[] temp = line.split(" ");
-                int len = temp[0].length();
-                String message = line.substring(len + 1); //No extra space
-                sendMessage(new MessageCtoS_PM(temp[0].substring(1), message));
+                if(temp.length<=1){
+                    System.out.println("Please enter a message to send privately.");
+                }
+                else {
+                    int len = temp[0].length();
+                    String message = line.substring(len + 1); //No extra space
+                    sendMessage(new MessageCtoS_PM(temp[0].substring(1), message));
+                }
             }
             else
                 sendMessage(new MessageCtoS_Chat(line));
